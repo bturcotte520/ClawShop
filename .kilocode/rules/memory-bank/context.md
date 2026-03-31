@@ -15,6 +15,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] Memory bank documentation
 - [x] Recipe system for common features
 - [x] Landing page with setup directions (Docker, GitHub, Google) and KiloClaw resource links
+- [x] /prompts page with 9 numbered copy-paste KiloClaw prompts and per-prompt copy buttons
 
 ## Current Structure
 
