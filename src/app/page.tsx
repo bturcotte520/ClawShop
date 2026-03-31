@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   const setupSteps = [
     {
@@ -62,11 +64,19 @@ export default function Home() {
     <main className="min-h-screen bg-neutral-950 text-white">
       {/* Header */}
       <header className="border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-sm font-bold">
-            K
+        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-sm font-bold">
+              K
+            </div>
+            <span className="font-semibold text-neutral-100 tracking-tight">KiloClaw Setup Guide</span>
           </div>
-          <span className="font-semibold text-neutral-100 tracking-tight">KiloClaw Setup Guide</span>
+          <Link
+            href="/prompts"
+            className="text-sm text-neutral-400 hover:text-neutral-200 transition-colors"
+          >
+            Prompts →
+          </Link>
         </div>
       </header>
 
