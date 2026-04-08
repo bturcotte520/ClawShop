@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CopyButton } from "./CopyButton";
+import Image from "next/image";
+import { PromptCard } from "./PromptCard";
 
 const prompts = [
   {
@@ -26,16 +27,13 @@ Otherwise: Check if today's memory file exists at memory/YYYY-MM-DD.md — creat
   },
   {
     title: "Morning Briefing",
-    description: "Daily 7 AM cron: calendar, email highlights, news, weather, and recommended tasks.",
+    description: "Daily 7 AM cron: calendar, news, weather, and recommended tasks.",
     text: `Set up a cron job that runs every day at 7:00 AM.
 Every morning, I want you to send me a briefing. Here's what it should include:
 Today's calendar: Pull all events for today. For each one, list the time, title, and attendees. Flag any conflicts.
 
 
-Email highlights: Check my Gmail for unread messages from the last 24 hours. Summarize the top 5 most important by sender and subject. Flag anything that looks urgent.
-
-
-News and blogs: Search the web for the latest news on [YOUR TOPICS — e.g. "AI agents, developer tools, open source"]. Also check [YOUR SPECIFIC SOURCES — e.g. "Hacker News, TechCrunch, The Verge"]. Give me 3-5 headlines that are actually worth reading, with one-sentence summaries and links.
+News and blogs: Search the web for the latest news on [YOUR TOPICS]. Also check [YOUR SPECIFIC SOURCES]. Give me 3-5 headlines that are actually worth reading, with one-sentence summaries and links.
 
 
 Weather: Check the weather for [YOUR CITY]. If rain is expected, mention it. If it's unusually hot or cold, mention it.
@@ -52,7 +50,7 @@ Format everything clean and scannable. Keep it short. Don't send a novel. If the
     text: `Set up a cron job that runs every 2 hours during business hours, Monday through Friday (9 AM to 6 PM).
 Every time it runs, check my Gmail inbox for new unread messages since the last check.
 Categorize each message into one of these buckets:
-Urgent: Needs a response today. Emails from [LIST KEY CONTACTS — e.g. "my manager, direct reports, key clients"], or anything containing words like "urgent," "ASAP," "deadline today," or "time-sensitive."
+Urgent: Needs a response today. Emails from [LIST KEY CONTACTS], or anything containing words like "urgent," "ASAP," "deadline today," or "time-sensitive."
 Action needed: Needs a response this week but not today. Meeting requests, project updates that need input, questions directed at me.
 Informational: Newsletters, automated notifications, CC'd threads, FYI messages. Summarize each in one line.
 Ignore: Marketing, cold outreach, spam that got through. Don't surface these.
@@ -83,7 +81,7 @@ Check if they already exist in my contacts memory. If not, create a new entry.
 For each contact, track: their name, email, company/role if you can determine it, when I first interacted with them, when we last interacted, how many times we've interacted, and any important context from our conversations.
 Filter out noise — marketing emails, automated notifications, cold outreach, newsletters. Only track real human interactions.
 Store all of this in a structured format in memory/contacts.md.
-When I ask you about a contact — like "what do I know about Sarah?" or "who haven't I talked to in a while?" or "who do I know at [company]?" — search your contacts memory and give me everything you have.
+When I ask you about a contact — like "what do I know about Sarah?" or "who haven't I talked to in a while?" or "who do I know at [COMPANY NAME]?" — search your contacts memory and give me everything you have.
 Also: if anyone I've interacted with hasn't heard from me in 14+ days and our last interaction suggested a follow-up, flag them in my morning briefing.`,
   },
   {
@@ -107,10 +105,10 @@ Acknowledge saves briefly — something like "Got it" or "Saved" — and move on
     description: "Daily noon cron: Hacker News, Reddit, and web search filtered for your topics, under 500 words.",
     text: `Set up a cron job that runs every day at 12:00 PM (noon).
 I want a daily research digest. Here's what to do:
-Search Hacker News for the top stories from the last 24 hours. Filter for topics related to [YOUR TOPICS — e.g. "AI, developer tools, open source, startups"]. Give me the top 5 most interesting, with a one-sentence summary of why each matters.
+Search Hacker News for the top stories from the last 24 hours. Filter for topics related to [YOUR TOPICS]. Give me the top 5 most interesting, with a one-sentence summary of why each matters.
 
 
-Search Reddit for the most upvoted posts in the last 24 hours from these subreddits: [YOUR SUBREDDITS — e.g. "r/programming, r/MachineLearning, r/SaaS, r/startups"]. Top 3, summarized.
+Search Reddit for the most upvoted posts in the last 24 hours from these subreddits: [YOUR SUBREDDITS]. Top 3, summarized.
 
 
 Search the web for any notable news, launches, or announcements in my space from the last 24 hours. Things I might have missed. Top 3.
@@ -131,60 +129,41 @@ export default function PromptsPage() {
       <header className="border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-sm font-bold">
-              K
-            </div>
-            <span className="font-semibold text-neutral-100 tracking-tight group-hover:text-white transition-colors">
-              KiloClaw Setup Guide
-            </span>
+            <Image
+              src="/logolarge.png"
+              alt="ClawShop"
+              width={120}
+              height={40}
+              className="h-8 w-auto object-contain"
+            />
           </Link>
           <span className="text-neutral-700">/</span>
-          <span className="text-neutral-400 text-sm">Prompts</span>
+          <span className="text-neutral-400 text-base">OpenClaw Starter Prompts</span>
         </div>
       </header>
 
       <div className="max-w-4xl mx-auto px-6 py-16 space-y-12">
 
         {/* Hero */}
-        <section className="space-y-3">
+        <section className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Copy-Paste Prompts
+            OpenClaw Starter Prompts
           </h1>
-          <p className="text-lg text-neutral-400 max-w-2xl">
-            Paste these prompts into KiloClaw to configure your AI assistant. Each one is self-contained — run them in order for best results.
+          <p className="text-xl text-neutral-400 max-w-2xl">
+            Paste these prompts into KiloClaw to configure your AI assistant. Fill in the fields, then copy — each prompt is self-contained.
           </p>
         </section>
 
         {/* Prompt list */}
-        <ol className="space-y-5">
+        <ol className="space-y-6">
           {prompts.map((prompt, index) => (
-            <li
+            <PromptCard
               key={index}
-              className="rounded-2xl border border-neutral-800 bg-neutral-900 overflow-hidden"
-            >
-              {/* Card header */}
-              <div className="flex items-start justify-between gap-4 px-6 pt-5 pb-4">
-                <div className="flex items-start gap-4">
-                  <span className="shrink-0 mt-0.5 w-7 h-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs font-semibold text-neutral-400">
-                    {index + 1}
-                  </span>
-                  <div className="space-y-0.5">
-                    <h2 className="text-base font-semibold text-neutral-100">{prompt.title}</h2>
-                    <p className="text-sm text-neutral-500">{prompt.description}</p>
-                  </div>
-                </div>
-                <div className="shrink-0 pt-0.5">
-                  <CopyButton text={prompt.text} />
-                </div>
-              </div>
-
-              {/* Code block */}
-              <div className="border-t border-neutral-800 bg-neutral-950/60 px-6 py-4">
-                <pre className="text-xs text-neutral-400 font-mono whitespace-pre-wrap leading-relaxed overflow-x-auto">
-                  {prompt.text}
-                </pre>
-              </div>
-            </li>
+              index={index}
+              title={prompt.title}
+              description={prompt.description}
+              text={prompt.text}
+            />
           ))}
         </ol>
 
@@ -192,8 +171,8 @@ export default function PromptsPage() {
 
       {/* Footer */}
       <footer className="border-t border-neutral-800 mt-16">
-        <div className="max-w-4xl mx-auto px-6 py-6 text-center text-xs text-neutral-600">
-          KiloClaw Setup Guide — copy prompts and paste them directly into KiloClaw
+        <div className="max-w-4xl mx-auto px-6 py-6 text-center text-sm text-neutral-600">
+          ClawShop Attendee Guide — fill in your details, then copy prompts directly into KiloClaw
         </div>
       </footer>
     </main>
