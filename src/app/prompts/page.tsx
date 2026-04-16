@@ -4,26 +4,18 @@ import { PromptCard } from "./PromptCard";
 
 const prompts = [
   {
-    title: "AGENTS.md Setup",
-    description: "Configure your AI assistant's core directives, memory, and communication style.",
+    title: "Initial Best Practices",
+    description: "Enforce best practices for your AI assistant's core directives, memory, and communication style.",
     text: `Update AGENTS.md with these rules:
 Core directive: You are my personal AI assistant. Be proactive — don't wait to be asked. Flag things before they become problems.
 Anti-looping: If you've attempted the same action twice with the same result, stop and report the issue to me. Never retry more than twice without changing your approach.
-Memory: Always log important decisions, learnings, and context to today's memory file. Create the file if it doesn't exist.
 Hard rules: Never send any email, message, or communication externally without my explicit approval. Never delete anything. Always verify dates with the date command before scheduling.
-Communication: Keep messages short and scannable. If I send a voice note, respond with organized action items.`,
-  },
-  {
-    title: "HEARTBEAT.md Setup",
-    description: "Set up a heartbeat check that manages memory files, cron jobs, and daily hygiene.",
-    text: `Create HEARTBEAT.md with these rules:
-If the message contains "EXECUTION CRON", this is a scheduled task. Read the full instructions in the message and execute them. Never return HEARTBEAT_OK for cron executions.
-Otherwise: Check if today's memory file exists at memory/YYYY-MM-DD.md — create it if missing. Check all cron jobs for stale lastRunAtMs — if any are stale, force-run the missed jobs. Promote important learnings to MEMORY.md. If nothing needs attention, return HEARTBEAT_OK.`,
+Communication: Keep messages short and scannable, bullet points when appropriate, and no extra fluff or filler words.`,
   },
   {
     title: "Skills Setup",
     description: "Install the summarize, clawddocs, and QMD skills via npm.",
-    text: `Install the following skills: summarize, clawddocs, and QMD. Use npm. Don't install anything else right now.`,
+    text: `Install the following skills: summarize, clawddocs, and QMD. Use npm.`,
   },
   {
     title: "Morning Briefing",
@@ -59,19 +51,6 @@ Send me a summary formatted like: "X urgent, Y action needed, Z informational" w
 If there are no new messages, don't message me. Stay quiet.`,
   },
   {
-    title: "Meeting Prep",
-    description: "Every 15 min: detect first-time external meetings in the next 30–45 min and auto-research attendees.",
-    text: `Set up a cron job that runs every 15 minutes.
-Every time it runs, check my calendar for any meetings in the next 30 to 45 minutes.
-For each meeting, check if I've met this person before by searching my memory files and previous briefings.
-If it's a first-time meeting with an external person:
-Research the attendee — find their LinkedIn profile, their company, their role, any recent news or announcements about them or their company.
-Check my email history for any past threads with them or their company.
-Create a brief: who they are, what they do, what this meeting is probably about based on the calendar invite and email context, and one thing I should know going in.
-Send me the brief.
-If there are no upcoming first-time meetings, do nothing. Don't message me.`,
-  },
-  {
     title: "Personal CRM",
     description: "Daily 6 AM cron: build and maintain a contacts memory file from your email and calendar activity.",
     text: `Set up a daily cron job that runs at 6:00 AM.
@@ -81,7 +60,7 @@ Check if they already exist in my contacts memory. If not, create a new entry.
 For each contact, track: their name, email, company/role if you can determine it, when I first interacted with them, when we last interacted, how many times we've interacted, and any important context from our conversations.
 Filter out noise — marketing emails, automated notifications, cold outreach, newsletters. Only track real human interactions.
 Store all of this in a structured format in memory/contacts.md.
-When I ask you about a contact — like "what do I know about Sarah?" or "who haven't I talked to in a while?" or "who do I know at [COMPANY NAME]?" — search your contacts memory and give me everything you have.
+When I ask you about a contact — like "what do I know about Sarah?" or "who haven't I talked to in a while?" or "who do I know at a certain company?" — search your contacts memory and give me everything you have.
 Also: if anyone I've interacted with hasn't heard from me in 14+ days and our last interaction suggested a follow-up, flag them in my morning briefing.`,
   },
   {
@@ -128,14 +107,8 @@ export default function PromptsPage() {
       {/* Header */}
       <header className="border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src="/logolarge.png"
-              alt="ClawShop"
-              width={120}
-              height={40}
-              className="h-8 w-auto object-contain"
-            />
+          <Link href="/" className="text-neutral-400 hover:text-neutral-200 transition-colors text-sm">
+            ← Back
           </Link>
           <span className="text-neutral-700">/</span>
           <span className="text-neutral-400 text-base">OpenClaw Starter Prompts</span>

@@ -65,45 +65,57 @@ export default function Home() {
     <main className="min-h-screen bg-neutral-950 text-white">
       {/* Header */}
       <header className="border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/kiloclaw.png"
-              alt="KiloClaw"
-              width={200}
-              height={60}
-              className="h-12 w-auto object-contain"
-            />
-          </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+          <Image
+            src="/kiloclaw.png"
+            alt="KiloClaw"
+            width={200}
+            height={60}
+            className="h-10 sm:h-12 w-auto object-contain"
+          />
           <Link
-            href="/speakers"
-            className="text-sm text-neutral-400 hover:text-neutral-200 transition-colors"
+            href="/prompts"
+            className="text-sm font-semibold px-4 py-2 rounded-xl border border-violet-700/50 bg-violet-950/40 text-violet-400 hover:bg-violet-900/40 hover:border-violet-600 hover:text-violet-300 transition-all duration-150"
           >
-            Speakers →
+            Starter Prompts →
           </Link>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-6 py-16 space-y-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-14 sm:space-y-20">
 
         {/* Hero */}
         <section className="text-center space-y-6">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            ClawShop Attendee Guide
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+            ClawCon Michigan
           </h1>
-          <div className="flex justify-center">
+          <p className="text-lg font-medium text-neutral-400 sm:text-xl">KiloClaw Resource Guide</p>
+          <div className="flex justify-center items-center gap-10 sm:gap-16 flex-wrap">
             <Image
-              src="/logolarge.png"
-              alt="ClawShop"
-              width={600}
-              height={200}
+              src="/clawcon.png"
+              alt="ClawCon"
+              width={200}
+              height={80}
               loading="eager"
-              className="w-full max-w-lg h-auto object-contain"
+              className="h-28 w-auto object-contain sm:h-44"
+            />
+            <Image
+              src="/um.png"
+              alt="University of Michigan"
+              width={200}
+              height={80}
+              loading="eager"
+              className="h-28 w-auto object-contain sm:h-44"
+            />
+            <Image
+              src="/oc.png"
+              alt="OC"
+              width={200}
+              height={80}
+              loading="eager"
+              className="h-28 w-auto object-contain sm:h-44"
             />
           </div>
-          <p className="text-lg text-neutral-400 max-w-xl mx-auto">
-            Follow the steps below to set up your environment, then explore what KiloClaw can do.
-          </p>
         </section>
 
         {/* KiloClaw Signup */}
@@ -113,7 +125,7 @@ export default function Home() {
             <p className="text-neutral-500 text-sm">Start using KiloClaw today.</p>
           </div>
 
-          <div className="rounded-2xl border border-yellow-600/50 bg-yellow-950/30 p-8 space-y-5">
+          <div className="rounded-2xl border border-yellow-600/50 bg-yellow-950/30 p-6 sm:p-8 space-y-5">
             <div className="space-y-2">
               <h3 className="text-xl font-semibold text-neutral-100">Sign Up for a Free Trial</h3>
               <p className="text-neutral-400 leading-relaxed">Get started with KiloClaw — the AI-powered coding assistant. Sign up for free and start building your personal AI agent today.</p>
@@ -122,7 +134,7 @@ export default function Home() {
               href="https://kilo.codes/ClawShopCreate"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-3 rounded-xl transition-colors duration-150 text-base"
+              className="inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl transition-colors duration-150 text-base w-full sm:w-auto justify-center sm:justify-start"
             >
               Sign Up for Free Trial
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -155,6 +167,43 @@ export default function Home() {
             </svg>
           </Link>
         </section>
+
+        {/* Resources */}
+        <section className="space-y-6">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-semibold text-white">Resources</h2>
+            <p className="text-neutral-500 text-sm">Learn more about KiloClaw and how it performs.</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {resources.map(({ title, description, href, label, badge }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-900 p-6 hover:border-violet-800/60 hover:bg-neutral-800/60 transition-all duration-200"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-base font-semibold text-neutral-100 group-hover:text-white transition-colors">{title}</h3>
+                  <span className="shrink-0 text-xs font-medium px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-400 border border-violet-500/20">
+                    {badge}
+                  </span>
+                </div>
+                <p className="text-sm text-neutral-500 leading-relaxed flex-1">{description}</p>
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-violet-400 group-hover:text-violet-300 transition-colors">
+                  {label}
+                  <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="border-t border-neutral-800" />
 
         {/* Further Setup Directions */}
         <section className="space-y-6">
@@ -190,43 +239,6 @@ export default function Home() {
               </li>
             ))}
           </ol>
-        </section>
-
-        {/* Divider */}
-        <div className="border-t border-neutral-800" />
-
-        {/* Resources */}
-        <section className="space-y-6">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-semibold text-white">Resources</h2>
-            <p className="text-neutral-500 text-sm">Learn more about KiloClaw and how it performs.</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            {resources.map(({ title, description, href, label, badge }) => (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-900 p-6 hover:border-violet-800/60 hover:bg-neutral-800/60 transition-all duration-200"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-base font-semibold text-neutral-100 group-hover:text-white transition-colors">{title}</h3>
-                  <span className="shrink-0 text-xs font-medium px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-400 border border-violet-500/20">
-                    {badge}
-                  </span>
-                </div>
-                <p className="text-sm text-neutral-500 leading-relaxed flex-1">{description}</p>
-                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-violet-400 group-hover:text-violet-300 transition-colors">
-                  {label}
-                  <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                  </svg>
-                </span>
-              </a>
-            ))}
-          </div>
         </section>
 
       </div>
